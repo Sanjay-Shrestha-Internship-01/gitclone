@@ -1,0 +1,45 @@
+body{
+    background-color: white;
+}
+.navbar{
+    padding: 16px;
+    
+    line-height: 1.5;
+    color: white;
+    background-color: darkgrey;
+    
+}
+.navbar-left{
+    display: flex;
+   flex-flow: row wrap;
+   align-items: baseline;
+}
+.nav-input{
+    display: table-cell;
+    width: 100%;
+    padding-top: 0;
+    padding-bottom: 0;
+    font-size: inherit;
+    color: inherit;
+    line-height: 1.5;
+    width: 285px;
+    border: 0;
+    box-shadow: none;
+}
+
+.nav-input-button{
+    position: absolute;
+    left: 273px;
+    top: 18px;
+}
+.nav-list{
+   display: flex;
+   flex-flow: row wrap;
+   list-style-type: none;
+   margin: 0 20px;
+}
+.nav-list-items{
+    margin: 0 20px;
+}
+
+  
