@@ -20,8 +20,9 @@ export default class Sidebar extends Component {
     isEditMode: false,
   };
   handleOnChange = (event) => {
-    this.setState({ bio: event.target.value });
+    this.setState((prevState) =>  ({ editUser: {...prevState.editUser, bio: event.target.value}}))
     console.log(this.state.bio);
+    
   };
 
   handleOnEdit = () => {
@@ -36,11 +37,11 @@ export default class Sidebar extends Component {
         "https://api.github.com/user",
         { ...editUser },
         {
-          headers: new Headers({
+          headers: {
             Authorization:
               "Bearer " + "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",
             // "Content-Type": "application/json",
-          }),
+          },
         }
       )
       .then((res) => {
@@ -54,6 +55,7 @@ export default class Sidebar extends Component {
             twitterUsername: "",
           },
         });
+        this.setState({user:res.data})
       })
       .catch((err) => {
         console.log(err);
@@ -77,8 +79,9 @@ export default class Sidebar extends Component {
         this.setState({ star: starred.data });
       });
   }
-
+  
   render() {
+   
     return (
       <div className="sidebar">
         <div>
