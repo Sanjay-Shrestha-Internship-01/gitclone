@@ -20,7 +20,11 @@ export default class Sidebar extends Component {
     isEditMode: false,
   };
   handleOnChange = (event) => {
-    this.setState((prevState) =>  ({ editUser: {...prevState.editUser, bio: event.target.value}}))
+    this.setState((prevState) =>  ({ 
+        editUser: 
+        {...prevState.editUser, [event.target.id]: event.target.value}
+        
+    }))
     console.log(this.state.bio);
     
   };
@@ -99,11 +103,15 @@ export default class Sidebar extends Component {
                 ></textarea>
                 <div>
                   <label htmlFor="company"></label>
-                  <input type="text" id="company" placeholder="Company" />
+                  <input type="text" id="company"  defaultValue={this.state.user.company}
+                  onChange={this.handleOnChange} placeholder="Company" />
                 </div>
                 <div>
                   <label htmlFor="location"></label>
-                  <input type="text" id="location" placeholder="Location" />
+                  <input type="text" 
+                  id="location"  
+                  defaultValue={this.state.user.location}
+                  onChange={this.handleOnChange} placeholder="Location" />
                 </div>
                 <div>
                   <label htmlFor="email"></label>
@@ -111,17 +119,24 @@ export default class Sidebar extends Component {
                     type="email"
                     id="email"
                     defaultValue={this.state.user.email}
+                    onChange={this.handleOnChange}
                   />
                 </div>
                 <div>
                   <label htmlFor="website"></label>
-                  <input type="text" id="website" placeholder="Website" />
+                  <input type="text" 
+                  id="website"  
+                  defaultValue={this.state.user.website}
+                  onChange={this.handleOnChange}
+                  placeholder="Website" />
                 </div>
                 <div>
                   <label htmlFor="twitterUsername"></label>
                   <input
                     type="text"
                     id="twitterUsername"
+                    defaultValue={this.state.user.twitterUsername}
+                    onChange={this.handleOnChange}
                     placeholder="Twitter username"
                   />
                 </div>
