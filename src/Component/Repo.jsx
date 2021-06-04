@@ -93,7 +93,7 @@ export default class Repo extends Component {
       uniqueLanguages.push(language);
     }
     this.setState({
-      language: language,
+      language: language
     });
     console.log("language", this.state.language);
   };
@@ -114,7 +114,7 @@ export default class Repo extends Component {
             <optgroup label="Select Type">
               
               {this.state.language.map((repo) => (
-                <option id="language" value="" onchange= {this.handleLanguageInput}>
+                <option id="language" value={this.state.lanuguageInput} onchange= {this.handleLanguageInput}>
                   {repo}
                 </option>
               ))}
@@ -124,10 +124,10 @@ export default class Repo extends Component {
 
           <select name="" id="">
               <optgroup>
-                  <option onChange={this.handleTypeInput} value="">All</option>
-                  <option onChange={this.handleTypeInput} value="">Private</option>
-                  <option onChange={this.handleTypeInput} value="">Public</option>
-                  <option onChange={this.handleTypeInput} value="">Fork</option>
+                  <option onChange={this.handleTypeInput} value={this.state.typeInput}>All</option>
+                  <option onChange={this.handleTypeInput} value={this.state.typeInput}>Private</option>
+                  <option onChange={this.handleTypeInput} value={this.state.typeInput}>Public</option>
+                  <option onChange={this.handleTypeInput} value={this.state.typeInput}>Fork</option>
               </optgroup>
           </select>
         </form>
