@@ -20,13 +20,12 @@ export default class Sidebar extends Component {
     isEditMode: false,
   };
   handleOnChange = (event) => {
-    this.setState((prevState) =>  ({ 
-        editUser: 
-        {...prevState.editUser, [event.target.id]: event.target.value}
-        
-    }))
-    console.log(this.state.bio);
-    
+    this.setState((prevState) => ({
+      editUser: {
+        ...prevState.editUser,
+        [event.target.id]: event.target.value,
+      },
+    }));
   };
 
   handleOnEdit = () => {
@@ -44,7 +43,6 @@ export default class Sidebar extends Component {
           headers: {
             Authorization:
               "Bearer " + "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",
-            // "Content-Type": "application/json",
           },
         }
       )
@@ -59,7 +57,7 @@ export default class Sidebar extends Component {
             twitterUsername: "",
           },
         });
-        this.setState({user:res.data})
+        this.setState({ user: res.data });
       })
       .catch((err) => {
         console.log(err);
@@ -83,9 +81,8 @@ export default class Sidebar extends Component {
         this.setState({ star: starred.data });
       });
   }
-  
+
   render() {
-   
     return (
       <div className="sidebar">
         <div>
@@ -103,15 +100,23 @@ export default class Sidebar extends Component {
                 ></textarea>
                 <div>
                   <label htmlFor="company"></label>
-                  <input type="text" id="company"  defaultValue={this.state.user.company}
-                  onChange={this.handleOnChange} placeholder="Company" />
+                  <input
+                    type="text"
+                    id="company"
+                    defaultValue={this.state.user.company}
+                    onChange={this.handleOnChange}
+                    placeholder="Company"
+                  />
                 </div>
                 <div>
                   <label htmlFor="location"></label>
-                  <input type="text" 
-                  id="location"  
-                  defaultValue={this.state.user.location}
-                  onChange={this.handleOnChange} placeholder="Location" />
+                  <input
+                    type="text"
+                    id="location"
+                    defaultValue={this.state.user.location}
+                    onChange={this.handleOnChange}
+                    placeholder="Location"
+                  />
                 </div>
                 <div>
                   <label htmlFor="email"></label>
@@ -124,11 +129,13 @@ export default class Sidebar extends Component {
                 </div>
                 <div>
                   <label htmlFor="website"></label>
-                  <input type="text" 
-                  id="website"  
-                  defaultValue={this.state.user.website}
-                  onChange={this.handleOnChange}
-                  placeholder="Website" />
+                  <input
+                    type="text"
+                    id="website"
+                    defaultValue={this.state.user.website}
+                    onChange={this.handleOnChange}
+                    placeholder="Website"
+                  />
                 </div>
                 <div>
                   <label htmlFor="twitterUsername"></label>

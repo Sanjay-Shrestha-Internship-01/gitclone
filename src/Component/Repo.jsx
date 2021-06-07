@@ -9,16 +9,17 @@ export default class Repo extends Component {
   state = {
     repos: [],
     copyRepos: [],
-    lanuguageInput: "",
+    languageInput: "",
     typeInput: "",
-    language: [],
+    languages: [],
     searchInput: "",
+    filterRepos: [],
   };
   handleSearchInput = (event) => {
     const searchInput = event.target.value;
     this.setState({ searchInput: searchInput });
     this.filterRepos(
-      this.state.lanugaugeInput,
+      this.state.languageInput,
       this.state.typeInput,
       searchInput
     );
@@ -27,7 +28,7 @@ export default class Repo extends Component {
     const typeInput = event.target.value;
     this.setState({ typeInput: typeInput });
     this.filterRepos(
-      this.state.lanuguageInput,
+      this.state.languageInput,
       typeInput,
       this.state.searchInput
     );
@@ -42,12 +43,13 @@ export default class Repo extends Component {
     );
   };
 
-  filterRepos = (lanuguageInput, typeInput, searchInput) => {
+  filterRepos = (languageInput, typeInput, searchInput) => {
+    console.log(languageInput, typeInput, searchInput);
     const filterRepos = this.state.repos
       .filter((repo) => {
-        if (lanuguageInput == "") {
+        if (languageInput == "") {
           return true;
-        } else if (lanuguageInput == repo.language) {
+        } else if (languageInput == repo.language) {
           return true;
         } else {
           return false;
@@ -58,7 +60,7 @@ export default class Repo extends Component {
           return true;
         } else if (typeInput == "private" && repo.private) {
           return true;
-        } else if (typeInput == "public" && repo.private) {
+        } else if (typeInput == "public" && !repo.private) {
           return true;
         } else if (typeInput == "fork" && repo.fork) {
           return true;
@@ -69,19 +71,19 @@ export default class Repo extends Component {
       .filter((repo) => {
         if (searchInput === "") {
           return true;
-        } else if (repo.name.toLowerCase().indexOf(searchInput.toLowerCse())) {
+        } else if (repo.name.toLowerCase().indexOf(searchInput.toLowerCase())> -1) {
           return true;
         } else {
           return false;
         }
       });
+      this.setState({filterRepos});
   };
 
   componentDidMount() {
     axios.get("https://api.github.com/users/sanjshres/repos").then((res) => {
       console.log(res.data);
-      this.setState({ repos: res.data });
-      this.setState({ copyRepos: res.data });
+      this.setState({ repos: res.data, filterRepos: res.data  });
     });
   }
 
@@ -93,54 +95,73 @@ export default class Repo extends Component {
       uniqueLanguages.push(language);
     }
     this.setState({
-      language: language
+      language: language,
     });
-    console.log("language", this.state.language);
+    console.log("language", this.state.languages);
   };
 
   render() {
     return (
-      <div class="repo-contain">
+      <div className="repo-contain">
         <form action="">
           <input
             type="text"
             id="searchInput"
-            value=""
-            onchange= {this.handleSearchInput}
+            value = {this.state.searchInput}
+            onChange={this.handleSearchInput}
             placeholder="Find a repository..."
           />
 
-          <select name="" id="" onChange={this.setLanguageData}>
+          <select  onChange={this.handleLanguageInput}>
             <optgroup label="Select Type">
-              
-              {this.state.language.map((repo) => (
-                <option id="language" value={this.state.lanuguageInput} onchange= {this.handleLanguageInput}>
-                  {repo}
+              {this.state.languages.map((language) => (
+                <option
+                  value={this.state.languageInput}
+                >
+                  {language}
                 </option>
               ))}
             </optgroup>
           </select>
 
-
-          <select name="" id="">
-              <optgroup>
-                  <option onChange={this.handleTypeInput} value={this.state.typeInput}>All</option>
-                  <option onChange={this.handleTypeInput} value={this.state.typeInput}>Private</option>
-                  <option onChange={this.handleTypeInput} value={this.state.typeInput}>Public</option>
-                  <option onChange={this.handleTypeInput} value={this.state.typeInput}>Fork</option>
-              </optgroup>
+          <select  onChange={this.handleTypeInput}>
+            <optgroup>
+              <option
+               
+                value={this.state.typeInput}
+              >
+                All
+              </option>
+              <option
+                value={this.state.typeInput}
+              >
+                Private
+              </option>
+              <option
+                
+                value={this.state.typeInput}
+              >
+                Public
+              </option>
+              <option
+                
+                value={this.state.typeInput}
+              >
+                Fork
+              </option>
+            </optgroup>
           </select>
         </form>
         <ul>
-          {this.state.repos.map((repo) => (
-            <form class="repo-form">
+          {this.state.filterRepos.map((repo) => (
+            <form className="repo-form">
               <div className="repo-title">{repo.name}</div>
               <div>
                 <div>{repo.language}</div>
                 <div>
                   <relative-time
                     datetime={repo.updated_at}
-                    class="no-wrap"
+                    className="no-wrap"
                     title="May 20, 2021, 3:56 PM GMT+5:45"
                   ></relative-time>
                   {repo.updated_at}
