@@ -1,0 +1,71 @@
+body{
+    background-color: white;
+    color: black;
+}
+.navbar{
+    padding: 16px;
+    
+    line-height: 1.5;
+    color: white;
+    background-color: darkgrey;
+    
+}
+.navbar-left{
+    display: flex;
+   flex-flow: row wrap;
+   align-items: baseline;
+}
+.nav-input{
+    display: table-cell;
+    width: 100%;
+    padding-top: 0;
+    padding-bottom: 0;
+    font-size: inherit;
+    color: inherit;
+    line-height: 1.5;
+    width: 285px;
+    border: 0;
+    box-shadow: none;
+    color: black;
+}
+
+.nav-input-button{
+    position: absolute;
+    left: 273px;
+    top: 18px;
+}
+.nav-list{
+   display: flex;
+   flex-flow: row wrap;
+   list-style-type: none;
+   margin: 0 20px;
+}
+.nav-list-items{
+    margin: 0 20px;
+}
+.repo-contain{
+    position: absolute;
+    left: 500px;
+}
+
+// side Bar
+
+.sidebar{
+    margin-left: 100px;
+    width: 350px;
+    border: 1px solid black;
+    text-align: center;
+    position: absolute;
+}
+.profile-pic{
+    border-radius: 50%;
+    width: 80%;
+}
+
+// Repo
+.repo-form{
+    margin : 30px;
+}
+.repo-title{
+    font-size: 30px;
+}
